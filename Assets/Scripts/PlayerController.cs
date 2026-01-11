@@ -3,20 +3,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float walkSpeed = 5f;
-    public float runSpeed = 8f;
-    public float jumpHeight = 1.5f;
-    public float gravity = -9.81f;
+    [SerializeField]private float walkSpeed = 5f;
+    [SerializeField] private float runSpeed = 8f;
+    [SerializeField] private float jumpHeight = 1.5f;
+    [SerializeField] private float gravity = -9.81f;
 
     [Header("Look Settings")]
-    public Camera playerCamera;
-    public float mouseSensitivity = 100f;
-    public float lookXLimit = 80f; // Обмеження кута огляду вгору/вниз
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float lookXLimit = 80f;
 
     private CharacterController characterController;
-    private Vector3 velocity;
-    private float rotationX = 0;
-    private bool isGrounded;
+    [SerializeField] private Vector3 velocity;
+    [SerializeField] private float rotationX = 0;
+    [SerializeField] private bool isGrounded;
 
     void Start()
     {
