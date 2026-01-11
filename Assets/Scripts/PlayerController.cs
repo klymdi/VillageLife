@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lookXLimit = 80f;
 
     private CharacterController characterController;
-    [SerializeField] private Vector3 velocity;
-    [SerializeField] private float rotationX = 0;
-    [SerializeField] private bool isGrounded;
+    private Vector3 velocity;
+    private float rotationX = 0;
+    private bool isGrounded;
 
     void Start()
     {
