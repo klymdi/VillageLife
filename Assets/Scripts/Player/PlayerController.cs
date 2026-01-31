@@ -3,15 +3,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField]private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 8f;
-    [SerializeField] private float jumpHeight = 1.5f;
-    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] public float walkSpeed = 5f;
+    [SerializeField] public float runSpeed = 8f;
+    [SerializeField] public float jumpHeight = 1.5f;
+    [SerializeField] public float gravity = -9.81f;
 
     [Header("Look Settings")]
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private float mouseSensitivity = 100f;
-    [SerializeField] private float lookXLimit = 80f;
+    [SerializeField] public Camera playerCamera;
+    [SerializeField] public float mouseSensitivity = 100f;
+    [SerializeField] public float lookXLimit = 80f; 
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        HandleMovement();
+    }
+
+    private void HandleMovement() {
         isGrounded = characterController.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
@@ -40,9 +44,8 @@ public class PlayerController : MonoBehaviour
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
 
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0); 
-        transform.Rotate(Vector3.up * mouseX); 
-
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.Rotate(Vector3.up * mouseX);
 
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
