@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e41c1a2bedc43645a1a4651d9d112df, type: 3}
   m_Name: WaterSO
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNeedsSO
-  needName: 
-  needDrain: 0
+  needName: Water
+  needDrain: 1
+  maxValue: 100

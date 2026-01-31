@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 30279517}
   - component: {fileID: 30279516}
   - component: {fileID: 30279518}
+  - component: {fileID: 30279519}
   m_Layer: 5
   m_Name: Food Status
   m_TagString: Untagged
@@ -209,6 +210,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ea3c2c93ba46f4f8176df321054523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressBar
+  fillImage: {fileID: 462250872}
+--- !u!114 &30279519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30279514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d34b228801a4ca4da3f5e428defcdd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NeedsController
+  playerNeed: {fileID: 11400000, guid: d9b7ceb9567e4a84e9583acbf66802bd, type: 2}
 --- !u!1 &72546091
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,11 +281,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -885,11 +900,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -990,6 +1005,7 @@ GameObject:
   - component: {fileID: 708486703}
   - component: {fileID: 708486702}
   - component: {fileID: 708486704}
+  - component: {fileID: 708486705}
   m_Layer: 5
   m_Name: Sleep Status
   m_TagString: Untagged
@@ -1068,6 +1084,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ea3c2c93ba46f4f8176df321054523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressBar
+  fillImage: {fileID: 72546093}
+--- !u!114 &708486705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708486700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d34b228801a4ca4da3f5e428defcdd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NeedsController
+  playerNeed: {fileID: 11400000, guid: 5b2e1df33f5799e4b81448cccb54da5c, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1336,7 @@ GameObject:
   - component: {fileID: 1611053931}
   - component: {fileID: 1611053930}
   - component: {fileID: 1611053932}
+  - component: {fileID: 1611053933}
   m_Layer: 5
   m_Name: Water Status
   m_TagString: Untagged
@@ -1384,6 +1415,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ea3c2c93ba46f4f8176df321054523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressBar
+  fillImage: {fileID: 1729489202}
+--- !u!114 &1611053933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611053928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d34b228801a4ca4da3f5e428defcdd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NeedsController
+  playerNeed: {fileID: 11400000, guid: c639c2a2e4c90ab45bb1a676672845b0, type: 2}
 --- !u!1 &1657685345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,11 +1589,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1782,7 +1827,6 @@ GameObject:
   - component: {fileID: 1952206771}
   - component: {fileID: 1952206772}
   - component: {fileID: 1952206773}
-  - component: {fileID: 1952206774}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1851,25 +1895,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &1952206774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952206766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30f78856818ce4242afbd52319c1e12b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerNeeds
-  stats:
-  - data: {fileID: 11400000, guid: 4c29d9f53d2e7c5439f51bc68116d651, type: 2}
-    currentValue: 50
-  - data: {fileID: 11400000, guid: ad507cfd4c3b36a458cdb1031aa0c5c8, type: 2}
-    currentValue: 100
-  - data: {fileID: 11400000, guid: bbc0b97ee244c294e8ba121750c0ec63, type: 2}
-    currentValue: 30
 --- !u!1 &2086697114
 GameObject:
   m_ObjectHideFlags: 0
