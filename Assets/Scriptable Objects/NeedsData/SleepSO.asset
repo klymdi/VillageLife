@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6bced5f8dda8c4fb45cbdf1ab15b7b, type: 3}
-  m_Name: Water
-  m_EditorClassIdentifier: Assembly-CSharp::NeedsData
-  statName: Water
-  drainRate: 1
-  maxValue: 100
+  m_Script: {fileID: 11500000, guid: 7e41c1a2bedc43645a1a4651d9d112df, type: 3}
+  m_Name: SleepSO
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNeedsSO
+  needName: 
+  needDrain: 0

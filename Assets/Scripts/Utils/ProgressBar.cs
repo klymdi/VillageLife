@@ -1,15 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    private ProgressBar fillEntity;
+    [SerializeField] private Image fillImage;
     void Start()
     {
-        
+        fillImage.fillAmount = 1f;
     }
 
-    void Update()
-    {
-        
+    public void SetValue(float value) {
+        fillImage.fillAmount = value;
     }
 }
