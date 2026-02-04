@@ -6,9 +6,7 @@ public class InteractiveCrosshair : MonoBehaviour
     [SerializeField] private Image crosshairImage;
     [SerializeField] private float interactionDistance = 10f;
 
-    [SerializeField] private Color normalColor = Color.white;
-    [SerializeField] private Color detectColor = Color.red;
-
+    private IInteractable currentInteractable;
     private Outline lastOutline;
 
     void Update()
@@ -18,18 +16,61 @@ public class InteractiveCrosshair : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
-            if (lastOutline == null || hit.transform != lastOutline.transform)
-            {
-                if (lastOutline != null) lastOutline.enabled = false;
+            IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 
-                if (hit.transform.TryGetComponent<Outline>(out Outline newOutline))
+            if (interactable != null)
+            {
+                if (currentInteractable != interactable)
                 {
-                    lastOutline = newOutline;
-                    lastOutline.enabled = true;
+                    currentInteractable = interactable;
+
+                    if (InteractionPanelUI.Instance != null)
+                        InteractionPanelUI.Instance.ShowPanel(interactable.GetInteractionText());
+                }
+
+                HandleOutline(hit.transform);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    // —юди треба передати посиланн€ на плеЇра
+                    // interactable.Interact(thisPlayerReference);
                 }
             }
+            else
+            {
+                ClearInteraction();
+            }
         }
-        else if (lastOutline != null)
+        else
+        {
+            ClearInteraction();
+        }
+    }
+
+    private void HandleOutline(Transform hitTransform)
+    {
+        if (lastOutline == null || hitTransform != lastOutline.transform)
+        {
+            if (lastOutline != null) lastOutline.enabled = false;
+
+            if (hitTransform.TryGetComponent<Outline>(out Outline newOutline))
+            {
+                lastOutline = newOutline;
+                lastOutline.enabled = true;
+            }
+        }
+    }
+
+    private void ClearInteraction()
+    {
+        if (currentInteractable != null)
+        {
+            currentInteractable = null;
+            if (InteractionPanelUI.Instance != null)
+                InteractionPanelUI.Instance.HidePanel();
+        }
+
+        if (lastOutline != null)
         {
             lastOutline.enabled = false;
             lastOutline = null;
