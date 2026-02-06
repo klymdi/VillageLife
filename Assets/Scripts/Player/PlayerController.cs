@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,14 +15,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private float lookXLimit = 80f;
 
+
+    [Header("Carry Settings")]
+    [SerializeField] private int maxStackSize = 5;
+    [SerializeField] private float stackOffset = 0.1f;
     [SerializeField] private Transform shoulderPosition;
     [SerializeField] private Transform handPosition;
+
+    private List<IPickable> heldItemsStack = new List<IPickable>();
 
     private CharacterController characterController;
     private Vector3 velocity;
     private float rotationX = 0;
     private bool isGrounded;
 
+    public enum PickupPlace {Hand, Shoulder };
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -33,6 +42,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+
+        if (Input.GetMouseButtonDown(1)) dropObject();
     }
 
     private void HandleMovement() {
@@ -69,25 +80,52 @@ public class PlayerController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    public void pickUpObject(string place, Transform pickableObject)
+    public void pickUpObject(PickupPlace place, IPickable pickable)
     {
-        Transform targetParent = (place == "Shoulder") ? shoulderPosition : handPosition;
+        if (heldItemsStack.Count >= maxStackSize) return;
 
-        pickableObject.SetParent(targetParent);
-
-        pickableObject.localPosition = Vector3.zero;
-        pickableObject.localRotation = Quaternion.identity;
-
-        if (pickableObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if (heldItemsStack.Count > 0)
         {
-            rb.isKinematic = true;
+            if (heldItemsStack[0].Data.materialName != pickable.Data.materialName) return;
         }
 
-        if (pickableObject.TryGetComponent<Collider>(out Collider col))
-        {
-            col.enabled = false;
-        }
+        heldItemsStack.Add(pickable);
+
+        Transform itemTransform = pickable.Transform;
+        Transform targetParent = (place == PickupPlace.Shoulder) ? shoulderPosition : handPosition;
+
+        itemTransform.SetParent(targetParent);
+
+        float yOffset = (heldItemsStack.Count - 1) * stackOffset;
+        itemTransform.localPosition = new Vector3(0, yOffset, 0);
+        itemTransform.localRotation = pickable.Data.GetPickupRotation();
+
+        ToggleItemPhysics(itemTransform, false);
     }
 
+    public void dropObject()
+    {
+        if (heldItemsStack.Count == 0) return;
+
+        int lastIndex = heldItemsStack.Count - 1;
+        IPickable itemToDrop = heldItemsStack[lastIndex];
+
+        itemToDrop.Transform.SetParent(null);
+        ToggleItemPhysics(itemToDrop.Transform, true);
+
+        // Додаємо імпульс
+        if (itemToDrop.Transform.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            rb.AddForce(playerCamera.transform.forward * 3f, ForceMode.Impulse);
+        }
+
+        heldItemsStack.RemoveAt(lastIndex);
+    }
+
+    private void ToggleItemPhysics(Transform t, bool isEnabled)
+    {
+        if (t.TryGetComponent<Rigidbody>(out Rigidbody rb)) rb.isKinematic = !isEnabled;
+        if (t.TryGetComponent<Collider>(out Collider col)) col.enabled = isEnabled;
+    }
 
 }

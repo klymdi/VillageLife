@@ -39,9 +39,9 @@ public class InteractiveCrosshair : MonoBehaviour
                         InteractionPanelUI.Instance.ShowPanel(currentInteractable.GetInteractionText());
                 }
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    currentInteractable.Interact(playerController);
+                    currentInteractable.Pickup(playerController);
                 }
 
                 return; 
