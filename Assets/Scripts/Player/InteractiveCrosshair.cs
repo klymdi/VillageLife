@@ -3,13 +3,21 @@ using UnityEngine.UI;
 
 public class InteractiveCrosshair : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private float interactionDistance = 5f;
+
+    [Header("References")]
     [SerializeField] private Image crosshairImage;
-    [SerializeField] private float interactionDistance = 10f;
+    [SerializeField] private PlayerController playerController; 
 
     private IInteractable currentInteractable;
-    private Outline lastOutline;
 
     void Update()
+    {
+        CheckInteraction();
+    }
+
+    private void CheckInteraction()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -22,58 +30,36 @@ public class InteractiveCrosshair : MonoBehaviour
             {
                 if (currentInteractable != interactable)
                 {
+                    if (currentInteractable != null) currentInteractable.OnBlur();
+
                     currentInteractable = interactable;
+                    currentInteractable.OnFocus();
 
                     if (InteractionPanelUI.Instance != null)
-                        InteractionPanelUI.Instance.ShowPanel(interactable.GetInteractionText());
+                        InteractionPanelUI.Instance.ShowPanel(currentInteractable.GetInteractionText());
                 }
-
-                HandleOutline(hit.transform);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    // —юди треба передати посиланн€ на плеЇра
-                    // interactable.Interact(thisPlayerReference);
+                    currentInteractable.Interact(playerController);
                 }
-            }
-            else
-            {
-                ClearInteraction();
-            }
-        }
-        else
-        {
-            ClearInteraction();
-        }
-    }
 
-    private void HandleOutline(Transform hitTransform)
-    {
-        if (lastOutline == null || hitTransform != lastOutline.transform)
-        {
-            if (lastOutline != null) lastOutline.enabled = false;
-
-            if (hitTransform.TryGetComponent<Outline>(out Outline newOutline))
-            {
-                lastOutline = newOutline;
-                lastOutline.enabled = true;
+                return; 
             }
         }
+
+        ClearInteraction();
     }
 
     private void ClearInteraction()
     {
         if (currentInteractable != null)
         {
+            currentInteractable.OnBlur();
             currentInteractable = null;
+
             if (InteractionPanelUI.Instance != null)
                 InteractionPanelUI.Instance.HidePanel();
-        }
-
-        if (lastOutline != null)
-        {
-            lastOutline.enabled = false;
-            lastOutline = null;
         }
     }
 }
