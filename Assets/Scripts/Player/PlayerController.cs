@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
         itemToDrop.Transform.SetParent(null);
         ToggleItemPhysics(itemToDrop.Transform, true);
 
-        // Додаємо імпульс
         if (itemToDrop.Transform.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             rb.AddForce(playerCamera.transform.forward * 3f, ForceMode.Impulse);

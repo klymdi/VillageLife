@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IInteractable: IPickable
+public interface IInteractable
 {
     string GetInteractionText();
     void Interact(PlayerController player);

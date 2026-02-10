@@ -41,7 +41,7 @@ public class InteractiveCrosshair : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    currentInteractable.Pickup(playerController);
+                    currentInteractable.Interact(playerController);
                 }
 
                 return; 

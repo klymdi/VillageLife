@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Plank : MonoBehaviour, IInteractable
+public class Plank : MonoBehaviour, IInteractable, IPickable
 {
     [SerializeField] private ObjectHighlight highlight;
     [SerializeField] private BuildingMaterialsSO buildingMaterialsSO;
@@ -18,6 +18,7 @@ public class Plank : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
+        Pickup(player);
     }
 
     public void Pickup(PlayerController player)
