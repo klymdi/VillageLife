@@ -127,4 +127,21 @@ public class PlayerController : MonoBehaviour
         if (t.TryGetComponent<Collider>(out Collider col)) col.enabled = isEnabled;
     }
 
+    public IPickable GetTopItem()
+    {
+        if (heldItemsStack.Count == 0) return null;
+        return heldItemsStack[heldItemsStack.Count - 1];
+    }
+
+    public void RemoveTopItem()
+    {
+        if (heldItemsStack.Count > 0)
+        {
+            heldItemsStack.RemoveAt(heldItemsStack.Count - 1);
+        }
+    }
+
+    public bool IsHoldingItem => heldItemsStack.Count > 0;
+
 }
+
