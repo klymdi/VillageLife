@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public enum PickupPlace {Hand, Shoulder };
     void Start()
     {
+        // DIMA LOX
         characterController = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;
